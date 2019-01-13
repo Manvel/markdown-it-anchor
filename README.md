@@ -1,5 +1,12 @@
 # markdown-it-anchor [![npm version](http://img.shields.io/npm/v/markdown-it-anchor.svg?style=flat-square)](https://www.npmjs.org/package/markdown-it-anchor)
 
+**NOTE:** This is modified version of
+[markdown-it](https://github.com/valeriangalliat/markdown-it-anchor) plugin to
+work well with [CMintS](https://cmints.io). See [ticket for more
+details](https://github.com/Manvel/cmints/issues/44) and use
+[markdown-it](https://github.com/valeriangalliat/markdown-it-anchor), unless you
+don't need to make use of the `<fix>` tag as well.
+
 > Header anchors for [markdown-it].
 
 [markdown-it]: https://github.com/markdown-it/markdown-it

@@ -72,8 +72,8 @@ const calls = []
 const callback = (token, info) => calls.push({ token, info })
 
 equal(
-  md().use(anchor, { callback }).render('# First Heading\n\n## Second Heading'),
-  '<h1 id="first-heading">First Heading</h1>\n<h2 id="second-heading">Second Heading</h2>\n'
+  md({html: true}).use(anchor, { callback }).render('# First Heading\n\n## Second <fix>Tag</fix> Heading'),
+  '<h1 id="first-heading">First Heading</h1>\n<h2 id="second-tag-heading">Second <fix>Tag</fix> Heading</h2>\n'
 )
 
 equal(
@@ -89,5 +89,6 @@ equal(calls[0].token.tag, 'h1')
 equal(calls[0].info.title, 'First Heading')
 equal(calls[0].info.slug, 'first-heading')
 equal(calls[1].token.tag, 'h2')
-equal(calls[1].info.title, 'Second Heading')
-equal(calls[1].info.slug, 'second-heading')
+equal(calls[1].info.title, 'Second Tag Heading')
+equal(calls[1].info.slug, 'second-tag-heading')
+equal(calls[1].info.titleFix, 'Second <fix>Tag</fix> Heading')

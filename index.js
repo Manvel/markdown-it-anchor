@@ -58,7 +58,12 @@ const anchor = (md, opts) => {
       .forEach(token => {
         // Aggregate the next token children text.
         const title = tokens[tokens.indexOf(token) + 1].children
-          .filter(token => token.type === 'text' || token.type === 'code_inline' || token.type === 'html_inline')
+          .filter(token => token.type === 'text' || token.type === 'code_inline')
+          .reduce((acc, t) => acc + t.content, '')
+
+        const titleFix = tokens[tokens.indexOf(token) + 1].children
+          .filter(token => token.type === 'text' || token.type === 'code_inline' ||
+                 (token.type === 'html_inline' && token.content.includes('fix')))
           .reduce((acc, t) => acc + t.content, '')
 
         let slug = token.attrGet('id')
@@ -73,7 +78,7 @@ const anchor = (md, opts) => {
         }
 
         if (opts.callback) {
-          opts.callback(token, { slug, title })
+          opts.callback(token, { slug, title, titleFix })
         }
       })
   })
